@@ -1,5 +1,5 @@
 # Use Python 3.9.1
-FROM python:3.9.1-slim AS development
+FROM python:3.8.6-slim AS development
 
 # Build arguments to set non-root user
 ARG USER_ID=1000
@@ -22,7 +22,7 @@ RUN apt-get update -y -qq && xargs -ra packages.txt apt-get install -y -qq
 
 # Install JupyterLab
 RUN pip install jupyterlab
-
+RUN pip install tensorflow
 # Install Python packages
 ADD requirements.txt .
 RUN pip install -r requirements.txt
