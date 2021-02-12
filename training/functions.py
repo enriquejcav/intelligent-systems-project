@@ -1,10 +1,11 @@
+import os
 import pandas as pd
 import numpy as np
 import difflib
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 def dataframe_train_val():
-    df = pd.read_csv(r'../data/sample_products.csv')
+    df = pd.read_csv(os.environ['DATASET_PATH'])
     return df
 
 
@@ -37,7 +38,7 @@ def max_similarity(pairwise_similarity):
         occurences, similarity = take_occurences(pairwise_similarity, i)
         for j in range(0, similarity.shape[1]):
             position = similarity[0][j]
-            if position >= 0.90:
+            if position >= 0.25:
                 title_similarity.append(j)
                 break
             elif occurences == 0:
